@@ -5,6 +5,7 @@ const connectDB = require("./config/db");
 
 const express = require("express");
 const authRoutes = require("./routes/authRoutes");
+const projectRoutes = require("./routes/projectRoutes")
 
 // app.use("/api/auth", authRoutes);
 
@@ -13,6 +14,7 @@ connectDB();
 app.use(express.json());
 
 app.use("/auth", authRoutes);
+app.use("/api/projects",projectRoutes)
 
 app.use((err, req, res,next) => {
   const status = err.statusCode || 500;

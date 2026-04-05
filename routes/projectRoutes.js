@@ -6,43 +6,41 @@ const authMiddleware = require("../middlewares/authMiddleware");
 const roleMiddleware = require("../middlewares/roleMiddleware");
 
 router.post(
-  "/",
-  authMiddleware,
-  projectController.createProject
+  "/",  authMiddleware, projectController.createProject
 );
 
 router.get(
   "/my-projects",
   authMiddleware,
-  roleMiddleware("OWNER"),
+  roleMiddleware("owner"),
   projectController.getMyProjects
 );
 
 router.put(
   "/:id",
   authMiddleware,
-  roleMiddleware("OWNER"),
+  roleMiddleware("owner"),
   projectController.updateProject
 );
 
 router.patch(
   "/:id/close",
   authMiddleware,
-  roleMiddleware("OWNER"),
+  roleMiddleware("owner"),
   projectController.closePorject
 );
 
 router.delete(
   "/:id",
   authMiddleware,
-  roleMiddleware("OWNER"),
+  roleMiddleware("owner"),
   projectController.deleteProject
 );
 
 router.get(
   "/:id/investments",
   authMiddleware,
-  roleMiddleware("OWNER"),
+  roleMiddleware("owner"),
   projectController.getProjectInvetors
 );
 module.exports = router;

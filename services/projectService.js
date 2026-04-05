@@ -10,7 +10,7 @@ async function createProject(data, ownerId) {
     initialInvestment,
     percentage,
   } = data;
-  console.log(data);
+  // console.log(data);
 
   const project = await Project.create({
     title,
@@ -38,7 +38,7 @@ async function getMyProjects(ownerId) {
 }
 
 async function updateProject(projectId, ownerId, data) {
-  const project = await project.findById(projectId);
+  const project = await Project.findById(projectId);
   if (!project) throw new Error("Project not found");
 
   if (project.owner.toString() !== ownerId) {
@@ -53,20 +53,20 @@ async function updateProject(projectId, ownerId, data) {
 }
 
 async function deleteProject(projectId, ownerId) {
-  const project = await project.findById(projectId);
+  const project = await Project.findById(projectId);
   if (!project) throw new Error("Project not found");
   if (project.owner.toString() !== ownerId) {
     throw new Error("Unauthorized");
   }
-  return await Project.findByIdAndDelete(projectId);
+  return await Project.findByIdAndDelete(projectId); 
 }
 
 async function closePorject(projectId, ownerId) {
   const project = await Project.findById(projectId);
   if (!project) throw new Error("project not found");
 
-  if (!project.owner.toString() !== ownerId) {
-    throw new Error(Unauthorized);
+  if (project.owner.toString() !== ownerId) {
+    throw new Error("Unauthorized");
   }
   project.status = "closed";
 

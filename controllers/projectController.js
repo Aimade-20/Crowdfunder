@@ -47,7 +47,7 @@ async function deleteProject(req,res){
 async function closePorject(req,res) {
     try {
         const project =await projectService.closePorject(
-            req.params,
+            req.params.id,
             req.user.id
         )
         res.status(200).json(project)
